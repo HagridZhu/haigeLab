@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>海哥lab</title>
+  
+<style type="text/css">
+	.content{
+	  min-height: 800px;
+	  background: rgba(255,255,255,0.93);
+	  width: 80%;
+	  margin: 0 auto;
+	  margin-top: 61px;	
+	  min-width: 800px;
+	  
+	}
+    a {
+	    text-decoration: none
+	}
+
+	.back-bg{
+		background: url("./img/desk.jpg") no-repeat;
+		background-size: 100% auto;
+		width: 100%;
+		#height: 100%
+		position: relative;
+		background-attachment: fixed;
+	}
+	.headLine {
+		position: fixed;
+		width: 100%;
+		top:0;
+	}
+
+</style>
+
+  <script src="./js/vue.js"></script>
+  <link rel="stylesheet" href="./css/index.css">
+  <script src="./js/index.js"></script>
+
+</head>
+<body>
+	<div id = "app" class="back-bg" >
+		<div class="headLine" style="background-color: white" >
+			<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect"
+			    style="width: fit-content;margin:auto;">
+				<li class="el-menu-item index" style="font-size: 25px;pointer-events:none;">
+					haigeLab
+				</li>
+				<el-menu-item index="1">
+					<a href="./index.html">首页</a>
+				</el-menu-item>
+				<el-menu-item index="2">
+					一键清除浏览器缓存
+				</el-menu-item>
+				<el-menu-item index="3">
+					<a href="http://www.baidu.com" target="_blank">一键百度</a>
+				</el-menu-item><el-menu-item index="4">
+					<a href="http://www.google.cn" target="_blank">一键谷歌</a>
+				</el-menu-item>
+				<el-menu-item index="5">
+					<a href="./excel.html">excel功能</a>
+				</el-menu-item>
+			</el-menu>
+		</div>
+	  
+		<div class="content" style="opacity:1;">哈哈哈哈</div>
+	</div>
+
+</body>
+  <script>
+    new Vue({
+      el: '#app',
+      data: function() {
+        return { visible: false, activeIndex: "1" }
+      },
+    methods: {
+      handleSelect(key, keyPath) {
+		if (key == 2) {
+			console.log('不要傻了，这是不可能清除浏览器缓存的');
+			this.$notify({
+				title: '成功',
+				message: '清除缓存成功',
+				type: 'success'
+			});
+		}
+      }
+    }
+    })
+  </script>
+</html>

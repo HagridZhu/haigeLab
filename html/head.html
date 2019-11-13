@@ -1,0 +1,26 @@
+<html>
+<body>
+<div class="headLine" style="background-color: white" >
+	<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect"
+		style="width: fit-content;margin:auto;">
+		<li class="el-menu-item index" style="font-size: 25px;pointer-events:none;">
+			haigeLab
+		</li>
+		<el-menu-item index="1">
+			<a href="/">首页</a>
+		</el-menu-item>
+		<el-menu-item index="2">
+			一键清除浏览器缓存
+		</el-menu-item>
+		<el-menu-item index="3">
+			<a href="http://www.baidu.com" target="_blank">一键百度</a>
+		</el-menu-item><el-menu-item index="4">
+			<a href="http://www.google.cn" target="_blank">一键谷歌</a>
+		</el-menu-item>
+		<el-menu-item index="5">
+			<a href="/excel.html">excel功能</a>
+		</el-menu-item>
+	</el-menu>
+</div>
+</body>
+</html>

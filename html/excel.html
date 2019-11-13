@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>海哥lab</title>
+	<link rel="stylesheet" href="./css/head.css">
+	<link rel="stylesheet" href="./css/index.css">
+	<script src="./js/vue.js"></script>
+	<script src="./js/index.js"></script>
+	<script src="./js/jquery-3.4.1.min.js"></script>
+	<style>
+		.upload-demo{
+			text-align:center;
+			padding: 20px;
+		}
+		.funBtn {
+			float: right;
+			padding-right: 30px;
+			padding-bottom: 20px;
+			padding-top: 20px;
+		}
+		.excel-table {
+			padding: 0 30px;
+		}
+	</style>
+</head>
+<body>
+	<div id = "app" class="back-bg" >
+		<div class="headLine" style="background-color: white" >
+			<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect"
+				style="width: fit-content;margin:auto;">
+				<li class="el-menu-item index" style="font-size: 25px;pointer-events:none;">
+					haigeLab
+				</li>
+				<el-menu-item index="1">
+					<a href="./index.html">首页</a>
+				</el-menu-item>
+				<el-menu-item index="2">
+					一键清除浏览器缓存
+				</el-menu-item>
+				<el-menu-item index="3">
+					<a href="http://www.baidu.com" target="_blank">一键百度</a>
+				</el-menu-item><el-menu-item index="4">
+					<a href="http://www.google.cn" target="_blank">一键谷歌</a>
+				</el-menu-item>
+				<el-menu-item index="5">
+					<a href="./excel.html">excel功能</a>
+				</el-menu-item>
+			</el-menu>
+		</div>
+		
+	    <!-- 不同页面功能内容开始 -->
+		<div class="content" style="opacity:1;">
+			<el-upload
+			  class="upload-demo"
+			  drag
+			  action="/excel/import"
+			  :on-success="showTable"
+			  :file-list="fileList"
+			  multiple>
+			  <i class="el-icon-upload"></i>
+			  <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+			  <div class="el-upload__tip" slot="tip">只能上传xls/xlsx文件</div>
+			</el-upload>
+			<div class="funBtn">
+				<el-button type="success" icon="el-icon-document" @click="downloadTemplate" >下载模板</el-button>
+				<el-button type="primary" icon="el-icon-search" @click="list">搜索</el-button>
+				<el-button type="primary" icon="el-icon-download">导出</el-button>
+			</div>
+			<div class="excel-table">
+				<el-table :data="tableData" style="width: 100%;border: solid 2px #eee;">
+				  <el-table-column prop="date" label="日期" width="180"></el-table-column>
+				  <el-table-column prop="name" label="姓名" width="180"></el-table-column>
+				  <el-table-column prop="address" label="地址"></el-table-column>
+				  <el-table-column prop="sex" label="性别"></el-table-column>
+				  <el-table-column prop="tall" label="身高"></el-table-column>
+				  <el-table-column prop="weight" label="体重"></el-table-column>
+				  <el-table-column prop="level" label="财富值"></el-table-column>
+				</el-table>
+			</div>
+		</div>
+		
+	</div>
+</body>
+  <script>
+    new Vue({
+      el: '#app',
+      data: function() {
+        return {
+			visible: false,
+			activeIndex: "5",
+			tableData: [],
+			fileList: []
+		}
+      },
+    methods: {
+      handleSelect(key, keyPath) {
+		if (key == 2) {
+			console.log('不要傻了，这是不可能清除浏览器缓存的');
+			this.$notify({
+				title: '成功',
+				message: '清除缓存成功',
+				type: 'success'
+			});
+		}
+      },
+	  showTable(res){
+		this.fileList = [];
+		console.log(res);
+		if (res.code != 200 ) {
+			this.$message.error(res.msg);
+		}else{
+			this.tableData = res.data;
+			this.$message({
+				message: '导入成功',
+				type: 'success',
+				center: true
+			});
+			
+		}
+	  },
+	  downloadTemplate(){
+		var $eleForm = $("<form id='download-form' method='get'></form>");
+		$eleForm.attr("action","/excel/download/template");
+		$(document.body).append($eleForm);
+		$eleForm.submit();
+	  },
+	  list(){
+	  let that = this;
+		$.get("excel/list", function(res){
+			console.log(res);
+			console.log(this.tableData);
+			that.tableData = res.data;
+		});
+	  }
+    }
+    })
+  </script>
+  <style>
+  .center {
+    margin: 0 auto;
+  }
+  </style>
+</html>
