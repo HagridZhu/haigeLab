@@ -6,6 +6,10 @@ public class HaigeLabException extends RuntimeException{
         super(message);
     }
 
+    public HaigeLabException(String message, Exception e) {
+        super(message, e);
+    }
+
     public HaigeLabException() {
         super();
     }

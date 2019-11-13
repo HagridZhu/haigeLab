@@ -1,6 +1,7 @@
 package com.moyulab.haige.haigelab.common;
 
 import lombok.Data;
+import lombok.Getter;
 
 @Data
 public class Result<T> {
