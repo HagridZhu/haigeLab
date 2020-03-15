@@ -1,0 +1,12 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: excel-service
+# 注册中心
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://moyulab:my123@localhost:10025/eureka/
