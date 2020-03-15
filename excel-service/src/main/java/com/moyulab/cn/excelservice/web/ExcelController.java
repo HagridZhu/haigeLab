@@ -14,4 +14,9 @@ public class ExcelController {
     public Object test(){
         return "excel/test=" + new Random().nextInt(100);
     }
+
+    @RequestMapping("total")
+    public String total(String name){
+        return name + ":" + new Random().nextInt(100);
+    }
 }

@@ -1,0 +1,25 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: user-service
+# 注册中心
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://moyulab:my123@localhost:10025/eureka/
+#feign 请求与响应的压缩
+feign:
+  compression:
+    request:
+      enabled: true
+      mime-types: text/xml,application/xml,application/json
+      min-request-size: 2048
+    response:
+      enabled: true
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
